@@ -7,10 +7,12 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 MODEL_KEY = os.environ["MODEL_KEY"]
 print("Model Key:", MODEL_KEY)
-print("Cuda available:", torch.cuda.is_available())
+print("Cuda available:", torch.cuda.is_available(), flush=True)
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_KEY)
 model = AutoModelForCausalLM.from_pretrained(MODEL_KEY).half().cuda()
+
+print("Model loaded", flush=True)
 
 kwargs = {
     "max_length": int,
