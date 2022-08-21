@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  ui:
+    build: ./ui/
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - MODEL_ENDPOINT=http://model:8000
+      - DB_FILE=/db/db.json.gz
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./.db:/db
+
+  model:
+    build: ./model/
+    environment:
+      - MODEL_KEY=EleutherAI/gpt-neo-1.3B
+      - PORT=8000
+      - TRANSFORMERS_CACHE=/cache/
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./.cache:/cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+              - driver: nvidia
+                device_ids: ['0']
+                capabilities: [gpu]

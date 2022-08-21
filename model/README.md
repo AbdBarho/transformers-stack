@@ -1,0 +1,1 @@
+docker build -t tempmodel .  && docker run -it --rm -p 8000:8000 -v $(pwd)/cache:/cache -v $(pwd)/db:/db --gpus=all tempmodel
