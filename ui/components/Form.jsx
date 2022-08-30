@@ -11,7 +11,7 @@ const items = {
   typical_p: number(0, 1, 0.05, 1),
   num_beam_groups: number(1, 50, 1, 1),
   num_beams: number(1, 50, 1, 1),
-  repetition_penalty: number(0.2, 10, 0.2, 1.2),
+  repetition_penalty: number(0.2, 10, 0.2, 1.8),
   length_penalty: number(0, 2, 0.05, 1),
   early_stopping: boolean(false),
 };
