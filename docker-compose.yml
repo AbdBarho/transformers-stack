@@ -9,7 +9,7 @@ services:
       - MODEL_ENDPOINT=http://model:8000
       - DB_FILE=/db/db.json.gz
     ports:
-      - "3000:3000"
+      - "9999:3000"
     volumes:
       - ./.db:/db
 
