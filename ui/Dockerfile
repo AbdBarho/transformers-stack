@@ -17,6 +17,6 @@ COPY . .
 COPY --from=build /app/.next/ .next/
 
 
-ENV DB_FILE=db/db.json.gz MODEL_ENDPOINT=http://0.0.0.0:8000
-EXPOSE 3000
+ENV DB_FILE=db/db.json.gz MODEL_ENDPOINT=http://0.0.0.0:8000 NODE_ENV=production
+EXPOSE 9999
 CMD npm run start
