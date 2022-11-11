@@ -6,11 +6,14 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 MODEL_KEY = os.environ["MODEL_KEY"]
+has_cuda = torch.cuda.is_available()
 print("Model Key:", MODEL_KEY)
-print("Cuda available:", torch.cuda.is_available(), flush=True)
+print("Cuda available:", has_cuda, flush=True)
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_KEY)
-model = AutoModelForCausalLM.from_pretrained(MODEL_KEY).half().cuda()
+model = AutoModelForCausalLM.from_pretrained(MODEL_KEY)
+if has_cuda:
+    model = model.half().cuda()
 
 print("Model loaded", flush=True)
 
@@ -40,7 +43,8 @@ def predict(input, **args):
     tokens = tokenizer(input, return_tensors="pt").to(0)
     outputs = model.generate(**tokens, **args)
     string = tokenizer.decode(outputs[0])
-    torch.cuda.empty_cache()
+    if has_cuda:
+        torch.cuda.empty_cache()
     return string
 
 
