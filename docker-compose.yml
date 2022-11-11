@@ -5,13 +5,14 @@ services:
     build: ./ui/
     restart: always
     environment:
-      - NODE_ENV=production
       - MODEL_ENDPOINT=http://model:8000
       - DB_FILE=/db/db.json.gz
     ports:
-      - "9999:3000"
+      - "9999:9999"
     volumes:
       - ./.db:/db
+    depends_on:
+      - model
 
   model:
     build: ./model/

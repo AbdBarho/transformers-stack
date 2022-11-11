@@ -11,3 +11,11 @@ This project uses `docker compose` for orchestrating two containers, `model` whi
 update the variable `MODEL_KEY` in `docker-compose.yml` to the name of the model you want, for example `bigscience/bloom-560m` or `EleutherAI/gpt-neo-1.3B`.
 
 And then run `docker compose up --build`! thats all you need! The UI will be available on [http://localhost:9999](http://localhost:9999) (you can change the port also in  `docker-compose.yml` )
+
+### Run on CPU
+create a file called `docker-compose.override.yml` and put the following in it:
+```yml
+services:
+  model:
+    deploy: {}
+```
